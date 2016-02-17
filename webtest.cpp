@@ -49,12 +49,12 @@ int main(int argc, char *argv[])
                     abort();
             }
         }
-        strcpy(strHostName, argv[optind++]);
-        std::string port = argv[optind++];
-        path = argv[optind++];
+        asprintf(&strHostName, "%s", argv[optind++]);
+        nHostPort = atoi(argv[optind++]);
+        asprintf(&path, "%s", argv[optind++]);
         NSOCKETS = atoi(argv[optind]);
-//        if (debugFlag)
-//            printf("Host: %s, Port %s, Path: %s, Count: %d, debug: %d", strHostName, port, path, NSOCKETS, debugFlag);
+        if (debugFlag)
+            printf("\nHost:%s\nPort:%d\nFile:%s\nSockets:%d\n", strHostName, nHostPort, path, NSOCKETS);
 
     }
 
