@@ -14,6 +14,7 @@
 #define BUFFER_SIZE         10000
 #define HOST_NAME_SIZE      255
 #define NSTD 3
+#define SUPER_DEBUG
 
 int main(int argc, char *argv[])
 {
@@ -89,6 +90,9 @@ int main(int argc, char *argv[])
     for (int i = 0; i < NSOCKETS; i++)
     {
         /* connect to host */
+#ifdef SUPER_DEBUG
+        printf("Getting here");
+#endif
         if (connect(hSocket[i], (struct sockaddr *) &Address, sizeof(Address))
             == SOCKET_ERROR)
         {
@@ -126,6 +130,13 @@ int main(int argc, char *argv[])
         if (debugFlag)
             printf("Request: %d, Time: %f\n", i + 1, latency[i]);
         sum += latency[i];
+        printf("\nClosing socket\n");
+        /* close socket */
+        if (close(hSocket[i]) == SOCKET_ERROR)
+        {
+            printf("\nCould not close socket\n");
+            return 0;
+        }
         // Take this one out of epoll
         epoll_ctl(epollFD, EPOLL_CTL_DEL, event.data.fd, &event);
     }
@@ -136,13 +147,7 @@ int main(int argc, char *argv[])
     {
         double difference = latency[i] - average;
         standardDeviation += (difference * difference);
-        printf("\nClosing socket\n");
-        /* close socket */
-        if (close(hSocket[i]) == SOCKET_ERROR)
-        {
-            printf("\nCould not close socket\n");
-            return 0;
-        }
+
     }
     printf("Average: %f, Standard Deviation: %f", average, standardDeviation);
 }
