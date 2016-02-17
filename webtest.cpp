@@ -13,14 +13,11 @@
 #define SOCKET_ERROR        -1
 #define BUFFER_SIZE         10000
 #define HOST_NAME_SIZE      255
-#define NSOCKETS 10
 #define NSTD 3
 
 int main(int argc, char *argv[])
 {
-    int hSocket[NSOCKETS];                 /* handle to socket */
-    double latency[NSOCKETS];
-    struct timeval oldtime[NSOCKETS + NSTD];
+    int NSOCKETS;
     struct hostent *pHostInfo;   /* holds info about a machine */
     struct sockaddr_in Address;  /* Internet socket address stuct */
     long nHostAddress;
@@ -47,16 +44,22 @@ int main(int argc, char *argv[])
                     debugFlag = 1;
                     break;
                 default:
-                    perror("Invalid flag. \nUsage: webtest host-name host-port path [-d]\n");
+                    perror("Invalid flag. \nUsage: webtest host-name host-port path num-requests [-d]\n");
                     abort();
             }
         }
         strcpy(strHostName, argv[optind++]);
         std::string port = argv[optind++];
-        path = argv[optind];
+        path = argv[optind++];
+        NSOCKETS = argv[optind];
 //        if (debugFlag)
-//            printf("Host: %s, Port %s, Path: %s, debug: %d", strHostName, port, path, debugFlag);
+//            printf("Host: %s, Port %s, Path: %s, Count: %d, debug: %d", strHostName, port, path, NSOCKETS, debugFlag);
+
     }
+
+    int hSocket[NSOCKETS];                 /* handle to socket */
+    double latency[NSOCKETS];
+    struct timeval oldtime[NSOCKETS + NSTD];
 
     printf("\nMaking a socket");
     /* make a socket */
