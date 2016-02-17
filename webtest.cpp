@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
         strcpy(strHostName, argv[optind++]);
         std::string port = argv[optind++];
         path = argv[optind++];
-        NSOCKETS = argv[optind];
+        NSOCKETS = atoi(argv[optind]);
 //        if (debugFlag)
 //            printf("Host: %s, Port %s, Path: %s, Count: %d, debug: %d", strHostName, port, path, NSOCKETS, debugFlag);
 
