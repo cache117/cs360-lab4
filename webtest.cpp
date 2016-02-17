@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
         asprintf(&path, "%s", argv[optind++]);
         NSOCKETS = atoi(argv[optind]);
         if (debugFlag)
-            printf("\nHost:%s\nPort:%d\nFile:%s\nSockets:%d\n", strHostName, nHostPort, path, NSOCKETS);
+            printf("\nHost:%s\nPort:%d\nPath:%s\nSockets:%d\n", strHostName, nHostPort, path, NSOCKETS);
 
     }
 
@@ -62,7 +62,6 @@ int main(int argc, char *argv[])
     double latency[NSOCKETS];
     struct timeval oldtime[NSOCKETS + NSTD];
 
-    printf("\nMaking a socket");
     /* make a socket */
     for (int i = 0; i < NSOCKETS; i++)
     {
@@ -90,7 +89,6 @@ int main(int argc, char *argv[])
     for (int i = 0; i < NSOCKETS; i++)
     {
         /* connect to host */
-        printf("Getting here");
         if (connect(hSocket[i], (struct sockaddr *) &Address, sizeof(Address))
             == SOCKET_ERROR)
         {
@@ -128,7 +126,7 @@ int main(int argc, char *argv[])
         if (debugFlag)
             printf("Request: %d, Time: %f\n", i + 1, latency[i]);
         sum += latency[i];
-        printf("\nClosing socket\n");
+//        printf("\nClosing socket\n");
         /* close socket */
         if (close(hSocket[i]) == SOCKET_ERROR)
         {
@@ -147,5 +145,5 @@ int main(int argc, char *argv[])
         standardDeviation += (difference * difference);
 
     }
-    printf("Average: %f, Standard Deviation: %f", average, standardDeviation);
+    printf("Average: %f\n Standard Deviation: %f\n", average, standardDeviation);
 }
