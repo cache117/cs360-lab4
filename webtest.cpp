@@ -29,7 +29,8 @@ int main(int argc, char *argv[])
     char strHostName[HOST_NAME_SIZE];
     int nHostPort;
     char *path;
-    int debugFlag;
+    int debugFlag = 0;
+    char option;
 
     if (argc < 3)
     {
@@ -52,16 +53,9 @@ int main(int argc, char *argv[])
         }
         strcpy(strHostName, argv[optind++]);
         std::string port = argv[optind++];
-        if (port.find_first_not_of("0123456789") != string::npos)
-        {
-            perror("Port must only contain numbers.\n");
-            return -1;
-        }
-        else
-        {
-            nHostPort = atoi(&port[0]);
-        }
         path = argv[optind];
+        if (debugFlag)
+            printf("Host: %s, Port %s, Path: %s, debug: %d", strHostName, port, path, debugFlag);
     }
 
     printf("\nMaking a socket");
