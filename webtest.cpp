@@ -90,9 +90,7 @@ int main(int argc, char *argv[])
     for (int i = 0; i < NSOCKETS; i++)
     {
         /* connect to host */
-#ifdef SUPER_DEBUG
         printf("Getting here");
-#endif
         if (connect(hSocket[i], (struct sockaddr *) &Address, sizeof(Address))
             == SOCKET_ERROR)
         {
