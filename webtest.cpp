@@ -54,8 +54,8 @@ int main(int argc, char *argv[])
         strcpy(strHostName, argv[optind++]);
         std::string port = argv[optind++];
         path = argv[optind];
-        if (debugFlag)
-            printf("Host: %s, Port %s, Path: %s, debug: %d", strHostName, port, path, debugFlag);
+//        if (debugFlag)
+//            printf("Host: %s, Port %s, Path: %s, debug: %d", strHostName, port, path, debugFlag);
     }
 
     printf("\nMaking a socket");
