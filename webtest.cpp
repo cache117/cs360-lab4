@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
     long nHostAddress;
     char pBuffer[BUFFER_SIZE];
     unsigned nReadAmount;
-    char strHostName[HOST_NAME_SIZE];
+    char *strHostName;
     int nHostPort;
     char *path;
     int debugFlag = 0;
