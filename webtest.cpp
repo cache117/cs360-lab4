@@ -9,6 +9,7 @@
 #include <sys/epoll.h>
 #include <sys/time.h>
 #include <iostream>
+#include <math.h>
 
 #define SOCKET_ERROR        -1
 #define BUFFER_SIZE         10000
@@ -143,7 +144,7 @@ int main(int argc, char *argv[])
     {
         double difference = latency[i] - average;
         standardDeviation += (difference * difference);
-
     }
+    standardDeviation = sqrt(standardDeviation / NSOCKETS);
     printf("Average: %f\nStandard Deviation: %f\n", average, standardDeviation);
 }
