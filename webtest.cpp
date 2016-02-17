@@ -145,5 +145,5 @@ int main(int argc, char *argv[])
         standardDeviation += (difference * difference);
 
     }
-    printf("Average: %f\n Standard Deviation: %f\n", average, standardDeviation);
+    printf("Average: %f\nStandard Deviation: %f\n", average, standardDeviation);
 }
